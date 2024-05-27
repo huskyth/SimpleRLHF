@@ -140,12 +140,13 @@ scheduler = get_scheduler(name='cosine',
                           num_training_steps=500)
 
 accelerator = Accelerator(gradient_accumulation_steps=16,
-                          mixed_precision='no')
+                          mixed_precision='fp16')
 
 model_critic, loader, optimizer, scheduler = accelerator.prepare(
     model_critic, loader, optimizer, scheduler)
 
 model_critic.train()
+
 for i, data in enumerate(loader):
     with accelerator.accumulate(model_critic):
         loss, value_chosen_sum, value_rejected_sum = model_critic(**data)
