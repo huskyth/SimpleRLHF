@@ -9,14 +9,11 @@ import lora
 from transformers import get_scheduler
 from accelerate import Accelerator
 
+tokenizer = TokenizerUtil()
 
-def tokenizer_tester():
-    tokenizer = TokenizerUtil()
+input_ids, attention_mask = tokenizer.encode('how are you', max_length=4)
 
-    input_ids, attention_mask = tokenizer.encode('how are you', max_length=4)
-
-    input_ids, attention_mask, tokenizer.decode(input_ids)
-
+input_ids, attention_mask, tokenizer.decode(input_ids)
 
 dataset = load_dataset('json', data_files='dataset/train.json', split='train')
 
@@ -78,7 +75,6 @@ def f():
     }]
 
 
-tokenizer = TokenizerUtil()
 optimizer = torch.optim.Adam(f(), lr=1e-3, betas=(0.9, 0.95))
 
 scheduler = get_scheduler(name='cosine',
