@@ -46,7 +46,7 @@ loader = torch.utils.data.DataLoader(dataset,
 
 len(loader), next(iter(loader))
 
-model_actor = AutoModelForCausalLM.from_pretrained('facebook/opt-1.3b')
+model_actor = AutoModelForCausalLM.from_pretrained('model/opt-350m')
 
 lora.insert(model_actor)
 lora.count_params(model_actor)
